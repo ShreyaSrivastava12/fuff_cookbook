@@ -31,7 +31,6 @@ Example Scan
 To scan a website using a common wordlist, you might use:
 ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
-
 - Specifying HTTP Methods:
   ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -X POST
 - Filtering Responses:
@@ -43,6 +42,74 @@ ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirbuster/directory-list
   ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -o results.json -of json
 - Use multiple wordlists for comprehensive scanning:
   ffuf -u http://example.com/FUZZ -w /path/to/wordlist1.txt,/path/to/wordlist2.txt
+
+-Specifying Headers
+Sometimes you need to include custom headers in your requests. This is common when dealing with APIs or web applications that require authentication tokens or specific headers.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -H "Authorization: Bearer YOUR_TOKEN_HERE"
+
+-Adding Multiple Headers
+You can add multiple headers by repeating the `-H` flag.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -H "Header1: value1" -H "Header2: value2"
+
+-Using POST Data
+If you need to send POST requests with specific data, use the `-d` flag.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -X POST -d "username=FUZZ&password=secret"
+
+-Using a Proxy
+To route your requests through a proxy, use the `-x` flag.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -x http://127.0.0.1:8080
+
+-Filtering by Response Words
+Filter results based on the number of words in the response.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -fw 100
+
+-Filtering by Response Lines
+Filter results based on the number of lines in the response.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -fl 20
+
+-Matching by Regex
+Match responses that contain a specific regex pattern.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -mr "Success"
+
+-Ignoring SSL Errors
+If you encounter SSL errors, you can instruct FFUF to ignore them with the `-k` flag.
+ffuf -u https://example.com/FUZZ -w /path/to/wordlist.txt -k
+
+-Recursive Fuzzing
+Perform recursive directory fuzzing to explore deeper levels of directories.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -recursion
+
+-Setting Recursion Depth
+Control the depth of recursive fuzzing.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -recursion -recursion-depth 3
+
+-Time Delay Between Requests
+Set a delay between requests to avoid overwhelming the server.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -p 0.5
+
+-Rate Limiting
+Limit the number of requests per second to be polite to the target server.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -rate 100
+
+-Verbose Output
+Enable verbose output to see more detailed information during the scan.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -v
+
+-Colorize Output
+Enable colorized output to make it easier to read the results in the terminal.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -c
+
+-Using Multiple Fuzz Keywords
+Use multiple fuzz keywords in the URL, headers, or POST data.
+ffuf -u http://example.com/FUZZ/api/v1/RESOURCE -w /path/to/wordlist1.txt:/path/to/wordlist2.txt -w /path/to/resource-list.txt -H "Authorization: Bearer YOUR_TOKEN_HERE"
+
+-Running FFUF in Quiet Mode
+Suppress most of the output to only show results.
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -s
+
+
+
+
 
 
 
