@@ -1,0 +1,53 @@
+Welcome to the FFUF Tool Cookbook! This guide will help you use the FFUF Tool, a powerful utility for finding hidden directories and files on websites and servers.
+
+FFUF (Fuzz Faster U Fool) is a command-line tool used to uncover hidden directories and files on web servers by sending multiple requests with various parameters. This process, known as "fuzzing," helps identify potential vulnerabilities that could be exploited.
+
+-> Installation
+1. Prerequisites: Ensure you have Go installed on your system.
+2. Install FFUF:
+   - Open your terminal.
+   - Run the command: `go install github.com/ffuf/ffuf@latest`
+   - Add the Go bin directory to your PATH if not already done.
+
+-> Step-by-Step Guide
+
+Step 1: Open Your Terminal
+- Launch the terminal application on your computer.
+
+Step 2: Basic FFUF Command
+- To start using FFUF, you need a URL and a wordlist (a list of potential directory and file names).
+- Example Command:
+  ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt
+  
+Step 3: Understand the Command
+- `-u http://example.com/FUZZ`: The target URL, where `FUZZ` is the placeholder for the fuzzing process.
+- `-w /path/to/wordlist.txt`: The path to the wordlist file.
+
+Step 4: Run the Command
+- Press Enter to execute the command.
+- FFUF will start sending requests to the target URL using the words from the wordlist to find hidden directories and files.
+
+Example Scan
+To scan a website using a common wordlist, you might use:
+ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+
+
+- Specifying HTTP Methods:
+  ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -X POST
+- Filtering Responses:
+  - By Status Code:
+    ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -fc 404
+  - By Size:
+    ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -fs 1234
+- To save the scan results in a file:
+  ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -o results.json -of json
+- Use multiple wordlists for comprehensive scanning:
+  ffuf -u http://example.com/FUZZ -w /path/to/wordlist1.txt,/path/to/wordlist2.txt
+
+
+
+### Keep Updated
+- Regularly update FFUF and your wordlists to benefit from the latest features and improvements.
+
+## Conclusion
+The FFUF Tool is a versatile and powerful utility for identifying hidden directories and files on web servers, which can be potential security risks. By following the steps and best practices outlined in this cookbook, you can enhance your cybersecurity measures and protect your systems from unauthorized access and exploitation. Happy fuzzing!
